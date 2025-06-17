@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patho-Scope AI :: Digital Diagnostic Workbench</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="workbench-container">
+        <!-- Left Panel -->
+        <div class="panel scanner-panel">
+            <h2 class="panel-header">Patho-Scanner</h2>
+            <form id="upload-form">
+                <label for="file-input" class="file-label">Click to select an image</label>
+                <input type="file" id="file-input" name="file" accept="image/jpeg, image/png, image/tiff">
+                <div id="file-name">No file selected.</div>
+                <button type="submit" class="btn btn-primary" id="analyze-btn" disabled>Analyze</button>
+            </form>
+        </div>
+
+        <!-- Center Panel -->
+        <div class="panel analysis-display">
+            <h2 class="panel-header">AI Analysis</h2>
+            <div id="analysis-placeholder" class="placeholder">Awaiting scan...</div>
+            <div id="analysis-content">
+                <img id="analyzed-image" src="" alt="Analyzed Scan">
+                <div class="result-grid">
+                    <div class="result-box">
+                        <h3>Classification</h3>
+                        <p id="prediction-text"></p>
+                    </div>
+                    <div class="result-box">
+                        <h3>Confidence</h3>
+                        <p id="confidence-text"></p>
+                    </div>
+                </div>
+                <h3>AI Assistant Insights</h3>
+                <div id="ai-explanation"></div>
+            </div>
+        </div>
+
+        <!-- Right Panel -->
+        <div class="panel history-log">
+            <h2 class="panel-header">History</h2>
+            <ul id="history-list" class="history-list">
+                {% for item in history %}
+                <li class="history-item" data-id="{{ item._id }}">
+                    <div class="history-item-info">
+                        <strong class="prediction-{{ item.prediction.split(' ')[0] }}">{{ item.prediction }}</strong>
+                        <small>{{ item.timestamp }}</small>
+                    </div>
+                    <button class="delete-btn" data-id="{{ item._id }}">×</button>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    
+    <div id="loader-overlay" class="loader-overlay"><div class="loader"></div></div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+</body>
+</html>
