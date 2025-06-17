@@ -9,8 +9,8 @@ An Intelligent Digital Workbench for Histopathology Analysis. Patho-Scope AI use
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/pathoscope-ai.git
-cd pathoscope-ai
+git clone https://github.com/Jerryblessed/Patho-Scope.git
+cd Patho-Scope
 ```
 
 ### 2. Create a Virtual Environment
